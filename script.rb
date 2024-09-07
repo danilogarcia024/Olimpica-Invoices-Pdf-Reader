@@ -26,7 +26,7 @@ end
 
 text = reader.text_in_region(
   14,   # minimum x (left-most)
-  700,  # maximum x (right-most)
+  800,  # maximum x (right-most)
   250,  # minimum y (bottom-most)
   400,  # maximum y (top-most)
   1,    # page (default 1)
@@ -36,6 +36,6 @@ text = reader.text_in_region(
 p text
 
 
-text_by_exact_match = reader.text_position(/subtotal/i, 1)
+text_by_exact_match = reader.text_position(/valor total/i, 1)
 p text_by_exact_match
 

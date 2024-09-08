@@ -10,14 +10,15 @@ GEM
     ruby-rc4 (0.1.5)
 
 PLATFORMS
-  x86_64-darwin-21
+  aarch64-linux
+  ruby
 
 DEPENDENCIES
   pdf-reader
-  pdf-reader-turtletext
+  pdf-reader-turtletext (~> 0.2.2)
 
 RUBY VERSION
-   ruby 3.0.3p157
+   ruby 3.3.4p94
 
 BUNDLED WITH
-   2.3.11
+   2.5.18

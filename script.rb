@@ -1,17 +1,13 @@
-# require 'pdf-reader'
-
-# File.open("example_invoice.pdf", "rb") do |io|
-#   reader = PDF::Reader.new(io)
-#   reader.pages.each do |page|
-#     puts page.fonts
-#     puts page.text
-#     #puts page.raw_content
-#   end
-# end
-
 require 'pdf-reader-turtletext'
+require 'pdf-reader'
 
 pdf_filename = 'example_invoice.pdf'
+
+io     = open(pdf_filename)
+reader = PDF::Reader.new(io)
+p reader.page_count
+
+
 reader = PDF::Reader::Turtletext.new(pdf_filename)
 options = { :y_precision => 5 }
 reader_with_options = PDF::Reader::Turtletext.new(pdf_filename,options)

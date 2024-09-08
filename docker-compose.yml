@@ -1,0 +1,19 @@
+version: '2.17.2'
+
+services:
+  api:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: tail -f /dev/null
+    networks:
+      - invoices-reader
+    volumes:
+      - ./:/api
+    working_dir: /api
+
+networks:
+  invoices-reader:
+    driver: bridge

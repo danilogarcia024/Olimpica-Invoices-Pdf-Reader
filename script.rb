@@ -16,15 +16,43 @@ end
 # Optionally, split the text into lines for further processing
 lines = extracted_text.split("\n")
 
-regex_1 = regex = /\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+\.-\s+[\w\s]+)\s+([\d,]+\.\d{2})/
+
+
+#regex_1 = /\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+\.-\s+[\w\s\/]+)\s+/
+
+regex_1 = /\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+\.-\s+[a-zA-Z0-9\/\.]+(?:\s[a-zA-Z0-9\/\.]+)*)\s+/
+regexp_nombre_producto = /(\d+)\.-\s+([a-zA-Z0-9\/\.]+(?:\s[a-zA-Z0-9\/\.]+)*)/
+regexp_to_inspect_before_line = /\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+\.-\s+[a-zA-Z0-9\/]+(?:\s[a-zA-Z0-9\/]+)*)\s+([\d]+\.\d{2})/
 # regex_2 = /\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+\.-\s+\w+)\s+([\d]+\.\d{2})\s+\w+\s+([\d,]+\.\d{2})\s+([\d,]+\.\d{2})\s+([\d,]+\.\d{2})/
 
 # Process lines to extract specific information, e.g., dates, transactions, amounts 
+counters = []
 lines.each_with_index do |line, index|
   # Example: Print each line (customize this to extract relevant data)
-  puts line if regex_1.match?(line)# || regekpjk'908j.60-y;64-5tg0p0b;ph-hg;-3-x_2.match(line)
+  #puts line if regex_1.match?(line)# || regex_2.match(line)
   #puts line
+  if match = regex_1.match(line)
+    codigo_negocio = match[1]
+    codigo_ean = match[2]
+    codigo_producto = match[3]
+    nombre_producto = match[4]
+    # cantidad = match[5]
+    # cajas_und = match[6]
+    match_nombre_producto_formatted = regexp_nombre_producto.match(nombre_producto)
+    if match_nombre_producto_formatted
+      counters.push(match_nombre_producto_formatted[1].to_i)
+      nombre_producto_formatted = match_nombre_producto_formatted[2].strip
+      puts [codigo_negocio, codigo_ean, codigo_producto, nombre_producto_formatted].join(',')
+    else
+      puts line
+    end
+    unless match_2 = regexp_to_inspect_before_line.match(line)
+      puts lines[index]
+    end
+  end
+  
 end
+puts counters.sort
 
 # reader = PDF::Reader::Turtletext.new(pdf_filename)
 # options = { :y_precision => 5 }
